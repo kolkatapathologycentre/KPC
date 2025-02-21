@@ -1,0 +1,437 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kolkata Pathology Centre</title>
+  <style>
+    /* Base CSS variables for light mode */
+    :root {
+      --primary-blue: #1a365d;
+      --secondary-blue: #2a4a7d;
+      --accent-teal: #38b2ac;
+      --text-light: #f0f4f8;
+      --background: #f0f4f8;
+      --text-color: #333;
+      --card-bg: #ffffff;
+      --info-box-bg: #f8fafc;
+    }
+    /* Override variables when dark mode is enabled */
+    body.dark-mode {
+      --primary-blue: #0d1b2a;
+      --secondary-blue: #1b263b;
+      --accent-teal: #38b2ac;
+      --text-light: #f0f4f8;
+      --background: #121212;
+      --text-color: #f0f4f8;
+      --card-bg: #1e1e1e;
+      --info-box-bg: #2c2c2c;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--text-color);
+    }
+    
+    /* Dark mode toggle button (cute & animated) */
+    #dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-teal);
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1100;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    #dark-mode-toggle:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Top contact bar with slide down animation */
+    .top-contact-bar {
+      background: var(--primary-blue);
+      color: var(--text-light);
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      animation: slideDown 0.8s ease forwards;
+      opacity: 0;
+    }
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Fade in for header, footer, and contact section */
+    header, footer, .contact-section {
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--text-light);
+      transition: transform 0.3s ease;
+    }
+    /* Spinning cute effect on hover */
+    .logo:hover {
+      transform: rotate(360deg);
+    }
+    
+    header {
+      background: var(--primary-blue);
+      padding: 25px 0;
+      text-align: center;
+      margin-top: 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: var(--text-light);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    
+    .hero {
+      background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)),
+                  url('https://images.unsplash.com/photo-1581595214211-6ac3a6b5a277?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      color: var(--text-light);
+      padding: 150px 20px;
+      text-align: center;
+      animation: fadeIn 1.5s ease forwards;
+      opacity: 0;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 25px;
+      font-weight: 700;
+      line-height: 1.3;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    .hero p {
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin: 60px 0;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+    }
+    .features-grid .feature-card:nth-child(1) { animation-delay: 0.2s; }
+    .features-grid .feature-card:nth-child(2) { animation-delay: 0.4s; }
+    .features-grid .feature-card:nth-child(3) { animation-delay: 0.6s; }
+    .feature-card:hover {
+      transform: translateY(-10px);
+    }
+    .feature-icon {
+      font-size: 2.8rem;
+      color: var(--accent-teal);
+      margin-bottom: 20px;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .service-card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-left: 5px solid var(--accent-teal);
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+    }
+    .services-grid .service-card:nth-child(1) { animation-delay: 0.2s; }
+    .services-grid .service-card:nth-child(2) { animation-delay: 0.4s; }
+    .services-grid .service-card:nth-child(3) { animation-delay: 0.6s; }
+    .service-card:hover {
+      transform: translateX(10px);
+    }
+    
+    .contact-section {
+      background: var(--card-bg);
+      padding: 50px;
+      border-radius: 15px;
+      margin: 80px 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .info-box {
+      text-align: center;
+      padding: 25px;
+      background: var(--info-box-bg);
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+    }
+    .contact-info .info-box:nth-child(1) { animation-delay: 0.2s; }
+    .contact-info .info-box:nth-child(2) { animation-delay: 0.4s; }
+    .contact-info .info-box:nth-child(3) { animation-delay: 0.6s; }
+    .info-box:hover {
+      transform: translateY(-5px);
+    }
+    .info-box i {
+      font-size: 2rem;
+      color: var(--accent-teal);
+      margin-bottom: 20px;
+    }
+    
+    footer {
+      background: var(--primary-blue);
+      color: var(--text-light);
+      padding: 50px 0;
+      text-align: center;
+    }
+    
+    /* Back-to-top button with a gentle pulse */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent-teal);
+      color: white;
+      padding: 15px 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      animation: pulse 2s infinite;
+      z-index: 1000;
+    }
+    .back-to-top:hover {
+      transform: scale(1.1);
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Cute fixed "Contact Me" button with a vCard download */
+    .contact-me {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 1000;
+    }
+    .contact-me a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-teal);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    .contact-me a:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 2.2rem; }
+      .top-contact-bar { flex-direction: column; gap: 10px; }
+      header h1 { font-size: 2rem; }
+    }
+  </style>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+  <!-- Dark Mode Toggle Button -->
+  <div id="dark-mode-toggle" onclick="toggleDarkMode()">
+    <i class="fas fa-moon"></i>
+  </div>
+
+  <div class="top-contact-bar">
+    <span><i class="fas fa-phone"></i> +91 9339108546 | +91 9830172917</span>
+    <span><i class="fas fa-envelope"></i> kolkatapathologycentre@gmail.com</span>
+  </div>
+
+  <header>
+    <div class="logo-container">
+      <img src="https://i.postimg.cc/fbx6R9vP/kpc.png" alt="Lab Logo" class="logo" />
+      <h1>Kolkata Pathology Centre</h1>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>ALL PATHOLOGICAL EXAMINATION DONE HERE</h2>
+    <p>General Physician &amp; Specialist Doctors Available!</p>
+  </section>
+
+  <div class="container">
+    <section class="features-grid">
+      <div class="feature-card">
+        <i class="fas fa-dna feature-icon"></i>
+        <h3>Semi-Auto Analyzer</h3>
+        <p>Accuracy and precision matters us the most</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-clock feature-icon"></i>
+        <h3>Fully Computrised</h3>
+        <p>Urgent reporting within 6-8 hours</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-shield-alt feature-icon"></i>
+        <h3>Quality Assurance</h3>
+        <p>ISO certified processes and protocols</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 style="color: var(--primary-blue); text-align: center; margin: 60px 0 40px;">Our Diagnostic Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Pathological Test</h3>
+          <p>(BLOOD, URINE, STOOL, SPUTUM, PUS, BIOPSY, FNAC) TEST DONE HERE</p>
+        </div>
+        <div class="service-card">
+          <h3>Available Service</h3>
+          <p>Blood Collection, Injection, Saline, Dressing, Catheter Male/Female</p>
+        </div>
+        <div class="service-card">
+          <h3>Contact Us For</h3>
+          <p>ECG, X-RAY, ECHO, USG, CT SCAN, MRI</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <h2 style="color: var(--primary-blue); text-align: center; margin-bottom: 50px;">Visit Our Center</h2>
+      <div class="contact-info">
+        <div class="info-box">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>Location</h3>
+          <p>3/4A/H/16, Narkeldanga Main Road,<br />Near: Pattar Building, Fassi Masjid<br />Kolkata, West Bengal 700011</p>
+        </div>
+        <div class="info-box">
+          <i class="fas fa-clock"></i>
+          <h3>Working Hours</h3>
+          <p>Mon-Sat: 8PM - 8PM<br />Sunday: 8AM - 2PM</p>
+        </div>
+        <div class="info-box">
+          <i class="fas fa-phone"></i>
+          <h3>Emergency Contact</h3>
+          <p>+91 9339108546<br />+91 9830172917</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; SINCE 2002 | Kolkata Pathology Centre. All rights reserved.</p>
+      <div style="margin-top: 25px;">
+        <p>NABL Accredited Laboratory • ISO 15189:2012 Certified</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back-to-top Button -->
+  <div class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+  <!-- Cute "Contact Me" Button with vCard Download -->
+  <div class="contact-me">
+    <a href="contact.vcf" download="contact.vcf">
+      <i class="fas fa-address-card"></i> Contact Me
+    </a>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      var icon = document.querySelector("#dark-mode-toggle i");
+      if (document.body.classList.contains('dark-mode')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    }
+  </script>
+</body>
+</html>
